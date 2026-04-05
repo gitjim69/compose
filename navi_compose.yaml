@@ -7,7 +7,8 @@ services:
     restart: unless-stopped
     environment:
       ND_RECENTLYADDEDBYMODTIME: true # Optional: put your config options customization here. Examples:
+      ND_SCANNER_PURGEMISSING: always   
       # ND_LOGLEVEL: debug
     volumes:
       - "./data:/data"
-      - "/mnt/Media/Music:/music:ro,required=false"
+      - "/FLASH/Media/Music:/music:ro,required=false"
