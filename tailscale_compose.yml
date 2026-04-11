@@ -1,0 +1,17 @@
+services:
+  tailscale:
+    image: tailscale/tailscale:stable
+    container_name: tailscaled
+    environment:
+      - TS_AUTHKEY=tskey-auth-knXA1ud3kj11CNTRL-8jqJTdMUBqSkPRnMGUS9qSRek6Qy1o8RH  # Replace with your auth key
+      - TS_STATE_DIR=/var/lib/tailscale
+      - TS_USERSPACE=0  # Disable userspace networking, use kernel networking
+      - TS_HOSTNAME=zimavault  # Specify the name you will see in tailscale panel
+    volumes:
+      - ./var/lib/tailscale:/var/lib/tailscale  # State data will be stored in this directory
+      - /dev/net/tun:/dev/net/tun  # Provide TUN device
+    network_mode: host  # Use host network
+    cap_add:
+      - NET_ADMIN
+      - NET_RAW  # Required network permissions
+    restart: unless-stopped  # Automatically restart if the container crashes
